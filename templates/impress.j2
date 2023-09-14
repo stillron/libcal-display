@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link href="impress-demo.css" rel="stylesheet" />
+     <link href="impress-common.css" rel="stylesheet" />
+    <title>{{ branch }} events!</title>
+  </head>
+  <body class="bg-dark">
+    <div class="fallback-message visually-hidden">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+
+<div id="impress"
+    data-transition-duration="1000"
+    
+    data-width="1920"
+    data-height="1080"
+    data-max-scale="3"
+    data-min-scale="0"
+    data-perspective="1000"
+    
+    data-autoplay="1">
+
+    {% for event in events -%}
+    <div class="step" data-x="{{ event.xcor }}" data-y="{{ event.ycor }}" data-z="{{ event.zcor }}" data-scale="{{ event.scale }}" data-rotate-y="{{ event.rotate }}">
+        <h2>{{ event.title }}</h2>
+        <img src="{{ event.image }}" />
+        <p>{{ event.weekday }}, {{event.month}} {{ event.day }}</p>
+        <p>{{ event.start_time }}</p>
+    </div>
+    {% endfor %}
+
+    <!-- <div class="step" data-x="0" data-y="0" data-z="200" data-autoplay="0">
+        <h2>Overview</h2>
+    </div> -->
+<!--
+ <div id="bored" class="step slide" data-x="-3000" data-y="1500" data-scale="2" data-rotate="45" data-autoplay="5">
+        <h2>Banned Book Club</h2>
+        <p>Apologies for the cancellation. Join the Top Ten Banned Books of 2022 Book Club at Kilton Library NEXT MONTH and dive into the captivating world of literary rebellion!</p>
+         <span class="w-50"><img src="https://lcimages.s3.amazonaws.com/data/feat_img/5564/15144/1686096051.jpg" /></span>
+    </div>
+    
+    <div class="step slide" data-x="0" data-y="-1500">
+        <q>Don’t you think that presentations given <strong>in modern browsers</strong> shouldn’t <strong>copy the limits</strong> of ‘classic’ slide decks?</q>
+    </div>
+    
+    
+    <div class="step slide" data-x="1000" data-y="-1500">
+        <q>Would you like to <strong>impress your audience</strong> with <strong>stunning visualization</strong> of your talk?</q>
+    </div>
+    
+    <div id="title" class="step" data-x="0" data-y="0" data-scale="4">
+        <span class="try">then you should try</span>
+        <h1>impress.js<sup>*</sup></h1>
+        <span class="footnote"><sup>*</sup> no rhyme intended</span>
+    </div>
+    
+    <div id="its" class="step" data-x="850" data-y="3000" data-rotate="90" data-scale="5">
+        <p>It’s a <strong>presentation tool</strong> <br/>
+        inspired by the idea behind <a href="http://prezi.com">prezi.com</a> <br/>
+        and based on the <strong>power of CSS3 transforms and transitions</strong> in modern browsers.</p>
+    </div>
+
+    <div id="big" class="step" data-x="3500" data-y="2100" data-rotate="180" data-scale="6">
+        <p>visualize your <b>big</b> <span class="thoughts">thoughts</span></p>
+    </div>
+    
+    <div id="tiny" class="step" data-x="2825" data-y="2325" data-z="-3000" data-transition-duration="3000" data-rotate="300" data-scale="1">
+        <p>and <b>tiny</b> ideas</p>
+    </div>
+    
+    <div id="ing" class="step" data-x="3500" data-y="-850" data-z="0" data-rotate="270" data-scale="6">
+        <p>by <b class="positioning">positioning</b>, <b class="rotating">rotating</b> and <b class="scaling">scaling</b> them on an infinite canvas</p>
+    </div>
+
+    <div id="imagination" class="step" data-x="6700" data-y="-300" data-scale="6">
+        <p>the only <b>limit</b> is your <b class="imagination">imagination</b></p>
+    </div>
+
+    <div id="source" class="step" data-x="6300" data-y="2000" data-rotate="20" data-scale="4">
+        <p>want to know more?</p>
+        <q><a href="http://github.com/impress/impress.js">use the source</a>, Luke!</q>
+    </div>
+
+    <div id="one-more-thing" class="step" data-x="6000" data-y="4000" data-scale="2">
+        <p>one more thing...</p>
+    </div>
+
+-->
+</div>
+    
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/impress/impress.js@2.0.0/js/impress.js"></script>
+    <script>impress().init();</script>
+
+  </body>
+</html>
