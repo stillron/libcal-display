@@ -1,13 +1,11 @@
-from dotenv import load_dotenv
-load_dotenv()
-
-import os
-api_secret = os.environ.get("api-token")
-
+from dotenv import dotenv_values
 import requests
 import random
 from datetime import datetime
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+
+config = dotenv_values('.env')
+
 env = Environment(
     loader=FileSystemLoader('templates'),
     autoescape=select_autoescape()
@@ -24,7 +22,7 @@ template = env.get_template("impress.j2")
 
 r = requests.post('https://leblibrary.libcal.com/1.1/oauth/token',
                   json={"client_id": 1226,
-                        "client_secret": api_secret,
+                        "client_secret": config['api-token'],
                         "grant_type": "client_credentials"})
 
 
@@ -44,7 +42,7 @@ ycor = 0
 rotate = 0
 
 for event in kilton_events['events']:
-    # xcor -= 1000 * random.randint(4,9) * len(kilton_events)
+    #xcor -= 1000 * random.randint(4,9) * len(kilton_events)
     # ycor += 1000 * random.randint(4,9) * len(kilton_events)
     ycor += 750
     scale = 1
