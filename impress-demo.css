@@ -85,7 +85,7 @@ table {
 body {
     font-family: 'PT Sans', sans-serif;
     min-height: 740px;
-    color: rgb(215,215,215);
+    color: rgb(220,220,220);
     background: rgb(215, 215, 215);
     background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(rgb(240, 240, 240)), to(rgb(190, 190, 190)));
     background: -webkit-radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));
@@ -202,11 +202,11 @@ a:focus {
 }
 
 .step h2 {
+    /* color: rgb(225,225,225); */
     font-size: 120px;
     line-height: 140px;
     padding-bottom: 40px;
     text-align: center;
-    /* text-shadow: 3px 3px 5px rgba(20,20,20,0.9); */
 }
 
 .step .event_info {
@@ -222,13 +222,14 @@ a:focus {
 .step .image img {
     width: 400px;
     border-radius: 50%;
-    box-shadow: 5px 5px 10px rgba(20,20,20,0.9);
+    box-shadow: 3px 3px 20px rgba(20,20,20,0.9);
     
 }
 
 .step .info {
     float: left;
     padding-left: 40px;
+    /* text-shadow: 2px 2px 2px rgba(20,20,20,0.9); */
 }
 
 /*
