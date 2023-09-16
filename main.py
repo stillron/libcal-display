@@ -32,7 +32,7 @@ events_headers = {'Content-type': 'application/json', 'Accept': 'text/plain', 'A
 
 k_events_response = requests.get('https://leblibrary.libcal.com/1.1/events?cal_id=15144', headers=events_headers)
 
-l_events_response = requests.get('https://leblibrary.libcal.com/1.1/events?cal_id=1', headers=events_headers)
+l_events_response = requests.get('https://leblibrary.libcal.com/1.1/events?cal_id=17790', headers=events_headers)
 kilton_events = k_events_response.json()
 leb_events = l_events_response.json()
 all_events = kilton_events['events'] + leb_events['events']
@@ -53,7 +53,8 @@ for event in all_events:
     ycor += 850
     scale = 1
     # rotate = random.randint(0,270)
-    rotate += 25
+    rotate += 45
+    rotate *= -1
     # zcor = random.randint(-3000,3000)
     zcor = 0
     new_event = {}

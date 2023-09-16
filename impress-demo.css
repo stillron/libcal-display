@@ -185,8 +185,8 @@ a:focus {
 
 .step {
     position: relative;
-    width: 1200px;
-    padding: 40px;
+    width: 1840px;
+    padding: 20px;
     margin: 20px auto;
 
     -webkit-box-sizing: border-box;
@@ -198,11 +198,37 @@ a:focus {
     font-family: 'PT Serif', georgia, serif;
     font-size: 48px;
     line-height: 1.5;
+
 }
 
 .step h2 {
     font-size: 120px;
-    line-height: 130px;
+    line-height: 140px;
+    padding-bottom: 40px;
+    text-align: center;
+    /* text-shadow: 3px 3px 5px rgba(20,20,20,0.9); */
+}
+
+.step .event_info {
+    margin:auto;
+    width: 60%; 
+     
+}
+
+.step .image {
+    float: left;
+}
+
+.step .image img {
+    width: 400px;
+    border-radius: 50%;
+    box-shadow: 5px 5px 10px rgba(20,20,20,0.9);
+    
+}
+
+.step .info {
+    float: left;
+    padding-left: 40px;
 }
 
 /*
