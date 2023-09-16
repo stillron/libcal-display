@@ -30,9 +30,14 @@ access_token = r.json().get('access_token')
 
 events_headers = {'Content-type': 'application/json', 'Accept': 'text/plain', 'Authorization': f"Bearer {access_token}"}
 
-events_response = requests.get('https://leblibrary.libcal.com/1.1/events?cal_id=15144', headers=events_headers)
+k_events_response = requests.get('https://leblibrary.libcal.com/1.1/events?cal_id=15144', headers=events_headers)
 
-kilton_events = events_response.json()
+l_events_response = requests.get('https://leblibrary.libcal.com/1.1/events?cal_id=1', headers=events_headers)
+kilton_events = k_events_response.json()
+leb_events = l_events_response.json()
+all_events = kilton_events['events'] + leb_events['events']
+
+
 
 branch = "KILTON"
 
@@ -41,10 +46,11 @@ xcor = 0
 ycor = 0
 rotate = 0
 
-for event in kilton_events['events']:
+for event in all_events:
+    # print(event)
     #xcor -= 1000 * random.randint(4,9) * len(kilton_events)
     # ycor += 1000 * random.randint(4,9) * len(kilton_events)
-    ycor += 750
+    ycor += 850
     scale = 1
     # rotate = random.randint(0,270)
     rotate += 25
@@ -66,6 +72,7 @@ for event in kilton_events['events']:
     # new_event['time'] = event_time
     new_event['description'] = event.get('description')
     new_event['image'] = event.get('featured_image')
+    new_event['campus'] = event.get('calendar').get('name')
     k_events.append(new_event)
 
 # print(k_events)
