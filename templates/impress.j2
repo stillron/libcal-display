@@ -30,10 +30,10 @@
     data-autoplay="1">
 
     {% for event in events -%}
-    <div class="step" data-x="{{ event.xcor }}" data-y="{{ event.ycor }}" data-z="{{ event.zcor }}" data-scale="{{ event.scale }}" data-rotate-y="{{ event.rotate }}"  >
+    <div class="step" data-x="{{ event.xcor }}" data-y="{{ event.ycor }}" data-z="{{ event.zcor }}" data-scale="{{ event.scale }}" data-rotate-y="{{ event.rotate }}" >
         <h2>{{ event.title }}</h2>
         <div class="event_info">
-        <div class="image" class="rotating">
+        <div class="image">
         <img  src="{{ event.image }}" />
         </div>
         <div class="info">

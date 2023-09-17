@@ -13,8 +13,6 @@ env = Environment(
 # import json
 # import arrow
 
-WEEKDAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-MONTHS = ['Dec', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 template = env.get_template("impress.j2")
 
 
@@ -74,8 +72,8 @@ for event in sorted_events:
     # new_event['start_time'] = ":".join(str(start_time_obj.time()).split(':')[:2])
     end_time_obj = datetime.fromisoformat(event.get('end'))
     new_event['end_time'] = end_time_obj.strftime('%-I:%M %p')
-    new_event['weekday'] = WEEKDAYS[start_time_obj.weekday()]
-    new_event['month'] = MONTHS[start_time_obj.month]
+    new_event['weekday'] = start_time_obj.strftime('%A') 
+    new_event['month'] = start_time_obj.strftime('%B')
     new_event['day'] = start_time_obj.day
     # event_time = full_event_date.time()
     # new_event['time'] = event_time
