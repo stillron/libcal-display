@@ -39,23 +39,27 @@ unsorted_events = kilton_events['events'] + leb_events['events']
 sorted_events = sorted(unsorted_events, key=lambda x: x.get('start'))
 
 
+# print(sorted_events[0].get('location').get('name'))
 
 branch = "KILTON"
 
-k_events = []
+new_events = []
 xcor = 0
 ycor = 0
 rotate = 0
 
 for event in sorted_events:
-    # print(event)
+    # if event.get('location').get('name') != "":
+    #     print(event.get('location').get('name'))
+    # else:
+    #     print("Oops")
     #xcor -= 1000 * random.randint(4,9) * len(kilton_events)
     # ycor += 1000 * random.randint(4,9) * len(kilton_events)
     ycor += 850
     scale = 1
     # rotate = random.randint(0,270)
     rotate += 45
-    rotate *= -1
+    # rotate *= -1
     # zcor = random.randint(-3000,3000)
     zcor = 0
     new_event = {}
@@ -74,8 +78,10 @@ for event in sorted_events:
     # new_event['time'] = event_time
     new_event['description'] = event.get('description')
     new_event['image'] = event.get('featured_image')
-    new_event['campus'] = event.get('calendar').get('name')
-    k_events.append(new_event)
+    new_event['campus'] = event.get('calendar').get('name').split(" ")[0]
+    new_event['location'] = event.get('location').get('name')
+    
+    new_events.append(new_event)
 
 # print(k_events)
 # for event in k_events:
@@ -86,7 +92,7 @@ for event in sorted_events:
 #     print(f"<div class=\"featured_image\"><img src=\"{event['image']}\">")
 #     print("</div> <!-- end event --!>")
 # print(k_events[0])
-output = template.render({"branch": "Kilton", "events": k_events})
+output = template.render({"branch": "Kilton", "events": new_events})
 # print(output)
 
 with open('test.html', 'w') as writer:
