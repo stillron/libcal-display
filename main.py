@@ -39,7 +39,7 @@ unsorted_events = kilton_events['events'] + leb_events['events']
 sorted_events = sorted(unsorted_events, key=lambda x: x.get('start'))
 
 
-# print(sorted_events[0].get('location').get('name'))
+# print(sorted_events[0])
 
 branch = "KILTON"
 
@@ -69,11 +69,14 @@ for event in sorted_events:
     new_event['ycor'] = ycor
     new_event['zcor'] = zcor
     new_event['title'] = event.get('title')
-    date_obj = datetime.fromisoformat(event.get('start'))
-    new_event['start_time'] = date_obj.time()
-    new_event['weekday'] = WEEKDAYS[date_obj.weekday()]
-    new_event['month'] = MONTHS[date_obj.month]
-    new_event['day'] = date_obj.day
+    start_time_obj = datetime.fromisoformat(event.get('start'))
+    new_event['start_time'] = start_time_obj.strftime('%-I:%M %p')
+    # new_event['start_time'] = ":".join(str(start_time_obj.time()).split(':')[:2])
+    end_time_obj = datetime.fromisoformat(event.get('end'))
+    new_event['end_time'] = end_time_obj.strftime('%-I:%M %p')
+    new_event['weekday'] = WEEKDAYS[start_time_obj.weekday()]
+    new_event['month'] = MONTHS[start_time_obj.month]
+    new_event['day'] = start_time_obj.day
     # event_time = full_event_date.time()
     # new_event['time'] = event_time
     new_event['description'] = event.get('description')
