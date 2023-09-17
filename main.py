@@ -35,7 +35,8 @@ k_events_response = requests.get('https://leblibrary.libcal.com/1.1/events?cal_i
 l_events_response = requests.get('https://leblibrary.libcal.com/1.1/events?cal_id=17790', headers=events_headers)
 kilton_events = k_events_response.json()
 leb_events = l_events_response.json()
-all_events = kilton_events['events'] + leb_events['events']
+unsorted_events = kilton_events['events'] + leb_events['events']
+sorted_events = sorted(unsorted_events, key=lambda x: x.get('start'))
 
 
 
@@ -46,7 +47,7 @@ xcor = 0
 ycor = 0
 rotate = 0
 
-for event in all_events:
+for event in sorted_events:
     # print(event)
     #xcor -= 1000 * random.randint(4,9) * len(kilton_events)
     # ycor += 1000 * random.randint(4,9) * len(kilton_events)
