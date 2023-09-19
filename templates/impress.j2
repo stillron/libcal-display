@@ -28,19 +28,19 @@
     data-min-scale="0"
     data-perspective="1000"
     
-    data-autoplay="1">
+    data-autoplay="5">
 
     {% for event in events -%}
-    <div class="step" data-x="{{ event.xcor }}" data-y="{{ event.ycor }}" data-z="{{ event.zcor }}" data-scale="{{ event.scale }}" data-rotate-y="{{ event.rotate }}" >
+    <div class="step" data-x="{{ event.xcor }}" data-y="{{ event.ycor }}" data-z="{{ event.zcor }}" data-scale="{{ event.scale }}" data-rotate-y="{{ event.rotate }}">
         <h2>{{ event.title }}</h2>
         <div class="event_info">
         <div class="image">
         <img  src="{{ event.image }}" />
         </div>
         <div class="info">
-        <p>{{ event.weekday }}, {{event.month}} {{ event.day }}</p>
-        <p>{{ event.start_time }} - {{ event.end_time }}</p>
-        <p>{{ event.campus }} {{ event.location }}</p>
+        <p class="event_date">{{ event.weekday }}, {{event.month}} {{ event.day }}</p>
+        <p class="event_time">{{ event.start_time }} - {{ event.end_time }}</p>
+        <p class="event_location rotating">{{ event.campus }} {{ event.location }}</p>
         </div>
         </div>
     </div>
