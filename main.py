@@ -10,13 +10,8 @@ env = Environment(
     loader=FileSystemLoader('templates'),
     autoescape=select_autoescape()
 )
-# import json
-# import arrow
 
 template = env.get_template("impress.j2")
-
-
-
 
 r = requests.post('https://leblibrary.libcal.com/1.1/oauth/token',
                   json={"client_id": 1226,
@@ -69,14 +64,11 @@ for event in sorted_events:
     new_event['title'] = event.get('title')
     start_time_obj = datetime.fromisoformat(event.get('start'))
     new_event['start_time'] = start_time_obj.strftime('%-I:%M %p')
-    # new_event['start_time'] = ":".join(str(start_time_obj.time()).split(':')[:2])
     end_time_obj = datetime.fromisoformat(event.get('end'))
     new_event['end_time'] = end_time_obj.strftime('%-I:%M %p')
     new_event['weekday'] = start_time_obj.strftime('%A') 
     new_event['month'] = start_time_obj.strftime('%B')
     new_event['day'] = start_time_obj.day
-    # event_time = full_event_date.time()
-    # new_event['time'] = event_time
     new_event['description'] = event.get('description')
     new_event['image'] = event.get('featured_image')
     new_event['campus'] = event.get('calendar').get('name').split(" ")[0]
@@ -84,17 +76,10 @@ for event in sorted_events:
     
     new_events.append(new_event)
 
-# print(k_events)
-# for event in k_events:
-#     print(f"<div class=\"event\">")
-#     print(f"<div class=\"title\">{event['title']}</div>")
-#     print(f"<div class=\"time\">{event['time']}</div>")
-#     # print(f"<div class=\"description\">{event['description']}</div>")
-#     print(f"<div class=\"featured_image\"><img src=\"{event['image']}\">")
-#     print("</div> <!-- end event --!>")
-# print(k_events[0])
+
 output = template.render({"branch": "Kilton", "events": new_events})
 # print(output)
+print({"branch": "Kilton", "events": new_events})
 
 with open('test.html', 'w') as writer:
     writer.write(output)
