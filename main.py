@@ -79,7 +79,7 @@ for event in sorted_events:
 
 output = template.render({"branch": "Kilton", "events": new_events})
 # print(output)
-print({"branch": "Kilton", "events": new_events})
+# print({"branch": "Kilton", "events": new_events})
 
 with open('test.html', 'w') as writer:
     writer.write(output)
