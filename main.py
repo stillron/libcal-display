@@ -14,7 +14,7 @@ env = Environment(
 template = env.get_template("impress.j2")
 
 r = requests.post('https://leblibrary.libcal.com/1.1/oauth/token',
-                  json={"client_id": 1226,
+                  json={"client_id": config['api-client-id'],
                         "client_secret": config['api-token'],
                         "grant_type": "client_credentials"})
 
