@@ -4,14 +4,67 @@ import random
 from datetime import datetime
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
+# Get env values
 config = dotenv_values('.env')
 
+# Setup Jinja2 Environment
 env = Environment(
     loader=FileSystemLoader('templates'),
     autoescape=select_autoescape()
 )
 
 template = env.get_template("impress.j2")
+
+def sort_events_by_date(events):
+    """Takes a list of event dicts and returns a sorted list of dict objects"""
+
+    return sorted(unsorted_events, key=lambda x: x.get('start'))
+
+def add_event_info(events):
+    """Takes a list of event dicts and returns a new list of dicts with only the desired info"""
+
+    events_info = []
+    
+    for event in events:
+        event_info = {}
+        event_info['title'] = event.get('title')
+        start_time_obj = datetime.fromisoformat(event.get('start'))
+        event_info['start_time'] = start_time_obj.strftime('%-I:%M %p')
+        end_time_obj = datetime.fromisoformat(event.get('end'))
+        event_info['end_time'] = end_time_obj.strftime('%-I:%M %p')
+        event_info['weekday'] = start_time_obj.strftime('%A') 
+        event_info['month'] = start_time_obj.strftime('%B')
+        event_info['day'] = start_time_obj.day
+        event_info['description'] = event.get('description')
+        event_info['image'] = event.get('featured_image')
+        event_info['campus'] = event.get('calendar').get('name').split(" ")[0]
+        event_info['location'] = event.get('location').get('name')
+
+        events_info.append(event_info)
+
+    return events_info
+
+def vertical_chain(events):
+    """ Takes an unsorted list of event dicts and returns a list of dicts
+    with info and positional data"""
+
+    sorted_events = sort_events_by_date(events)
+    computed_events = add_event_info(sorted_events)
+
+    xcor, ycor, zcor, rotate = 0, 0, 0, 0
+    
+    for event in computed_events:
+        ycor += 850
+        scale = 1
+        rotate += 45
+        event['rotate'] = rotate
+        event['scale'] = scale
+        event['xcor'] = xcor
+        event['ycor'] = ycor
+        event['zcor'] = zcor
+     
+    return computed_events
+
 
 r = requests.post('https://leblibrary.libcal.com/1.1/oauth/token',
                   json={"client_id": config['api-client-id'],
@@ -24,101 +77,15 @@ access_token = r.json().get('access_token')
 events_headers = {'Content-type': 'application/json', 'Accept': 'text/plain', 'Authorization': f"Bearer {access_token}"}
 
 kilton_events = requests.get('https://leblibrary.libcal.com/1.1/events?cal_id=15144', headers=events_headers).json()
-
 leb_events = requests.get('https://leblibrary.libcal.com/1.1/events?cal_id=17790', headers=events_headers).json()
-# kilton_events = k_events_response.json()
-# leb_events = l_events_response.json()
+
+
 unsorted_events = kilton_events['events'] + leb_events['events']
-# sorted_events = sorted(unsorted_events, key=lambda x: x.get('start'))
-
-def sort_events_by_date(events):
-    return sorted(unsorted_events, key=lambda x: x.get('start'))
-
-def vertical_chain(events):
-    computed_events = []
-    xcor, ycor, zcor, rotate = 0, 0, 0, 0
-    sorted_events = sort_events_by_date(events)
-    for event in sorted_events:
-        computed_event = {}
-        ycor += 850
-        scale = 1
-        rotate += 45
-        computed_event['rotate'] = rotate
-        computed_event['scale'] = scale
-        computed_event['xcor'] = xcor
-        computed_event['ycor'] = ycor
-        computed_event['zcor'] = zcor
-        computed_event['title'] = event.get('title')
-        start_time_obj = datetime.fromisoformat(event.get('start'))
-        computed_event['start_time'] = start_time_obj.strftime('%-I:%M %p')
-        end_time_obj = datetime.fromisoformat(event.get('end'))
-        computed_event['end_time'] = end_time_obj.strftime('%-I:%M %p')
-        computed_event['weekday'] = start_time_obj.strftime('%A') 
-        computed_event['month'] = start_time_obj.strftime('%B')
-        computed_event['day'] = start_time_obj.day
-        computed_event['description'] = event.get('description')
-        computed_event['image'] = event.get('featured_image')
-        computed_event['campus'] = event.get('calendar').get('name').split(" ")[0]
-        computed_event['location'] = event.get('location').get('name')
-    
-        computed_events.append(computed_event)
-        
-        
-    return computed_events
-        
-# print(sorted_events[0])
-
-branch = "KILTON"
 
 new_events = vertical_chain(unsorted_events)
 
 
-# print(new_events)
-
-# new_events = []
-# xcor = 0
-# ycor = 0
-# rotate = 0
-
-# for event in sorted_events:
-#     # if event.get('location').get('name') != "":
-#     #     print(event.get('location').get('name'))
-#     # else:
-#     #     print("Oops")
-#     #xcor -= 1000 * random.randint(4,9) * len(kilton_events)
-#     # ycor += 1000 * random.randint(4,9) * len(kilton_events)
-#     ycor += 850
-#     scale = 1
-#     # rotate = random.randint(0,270)
-#     rotate += 45
-#     # rotate *= -1
-#     # zcor = random.randint(-3000,3000)
-#     zcor = 0
-#     new_event = {}
-#     new_event['rotate'] = rotate
-#     new_event['scale'] = scale
-#     new_event['xcor'] = xcor
-#     new_event['ycor'] = ycor
-#     new_event['zcor'] = zcor
-#     new_event['title'] = event.get('title')
-#     start_time_obj = datetime.fromisoformat(event.get('start'))
-#     new_event['start_time'] = start_time_obj.strftime('%-I:%M %p')
-#     end_time_obj = datetime.fromisoformat(event.get('end'))
-#     new_event['end_time'] = end_time_obj.strftime('%-I:%M %p')
-#     new_event['weekday'] = start_time_obj.strftime('%A') 
-#     new_event['month'] = start_time_obj.strftime('%B')
-#     new_event['day'] = start_time_obj.day
-#     new_event['description'] = event.get('description')
-#     new_event['image'] = event.get('featured_image')
-#     new_event['campus'] = event.get('calendar').get('name').split(" ")[0]
-#     new_event['location'] = event.get('location').get('name')
-    
-#     new_events.append(new_event)
-
-
-output = template.render({"branch": "Kilton", "events": new_events})
-# print(output)
-# print({"branch": "Kilton", "events": new_events})
+output = template.render({"events": new_events})
 
 with open('test.html', 'w') as writer:
     writer.write(output)
