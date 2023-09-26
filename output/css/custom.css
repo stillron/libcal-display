@@ -198,11 +198,12 @@ a:focus {
     font-family: 'PT Serif', georgia, serif;
     font-size: 60px;
     line-height: 1.2em;
+    color: rgb(220,220,220);
 
 }
 
 .step h2 {
-    /* color: rgb(225,225,225); */
+    color: rgb(240,240,240);
     font-size: 120px;
     line-height: 140px;
     padding-bottom: 40px;
