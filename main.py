@@ -87,5 +87,5 @@ new_events = vertical_chain(unsorted_events)
 
 output = template.render({"events": new_events})
 
-with open('test.html', 'w') as writer:
+with open('output/test.html', 'w') as writer:
     writer.write(output)

@@ -97,7 +97,7 @@ body {
 
 #background-wrapper {
     position: static;
-    background-image: url("logo_name.svg");
+    background-image: url("../images/logo_name.svg");
     /* background-position: top left; */
     background-repeat: no-repeat;
     /* background-size: 669px 150px; */
