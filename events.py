@@ -1,28 +1,24 @@
 class Event:
     
-    def __init__(self, title, start_time, end_time, weekday,
-                 month, day, campus, location, description=None,
-                 image="placeholder.png", rotate_x=None, rotate_y=None,
-                 rotate_z=None, scale=None, xcor=None, ycor=None, zcor=None
-                 ):
+    def __init__(self):
         
-        self.title = title
-        self.start_time = start_time
-        self.end_time = end_time
-        self.weekday = weekday
-        self.month = month
-        self.day = day
-        self.campus = campus
-        self.location = location
-        self.description = description
-        self.image = featured_image
-        self.rotate_x = rotate_x
-        self.rotate_y = rotate_y
-        self.rotate_z = rotate_z
-        self.scale = scale
-        self.xcor = xcor
-        self.ycor = ycor
-        self.zcor = zcor
+        self.title = None
+        self.start_time = None
+        self.end_time = None
+        self.weekday = None
+        self.month = None
+        self.day = None
+        self.campus = None
+        self.location = None
+        self.description = None
+        self.image = None
+        self.rotate_x = None
+        self.rotate_y = None
+        self.rotate_z = None
+        self.scale = None
+        self.xcor = None
+        self.ycor = None
+        self.zcor = None
 
 class EventsManager:
     
