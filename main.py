@@ -3,6 +3,7 @@ import requests
 import random
 from datetime import datetime
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+from events import Event, EventsManager
 
 # Get env values
 config = dotenv_values('.env')
@@ -15,6 +16,8 @@ env = Environment(
 
 template = env.get_template("impress.j2")
 
+# em = EventsManager()
+
 def sort_events_by_date(events):
     """Takes a list of event dicts and returns a sorted list of dict objects"""
 
@@ -26,6 +29,10 @@ def add_event_info(events):
     events_info = []
     
     for event in events:
+        # an_event = Event(event)
+        # print(an_event, len(an_event))
+        # em.add_event(an_event)
+        # print(len(em))
         event_info = {}
         event_info['title'] = event.get('title')
         start_time_obj = datetime.fromisoformat(event.get('start'))
@@ -81,6 +88,7 @@ leb_events = requests.get('https://leblibrary.libcal.com/1.1/events?cal_id=17790
 
 
 unsorted_events = kilton_events['events'] + leb_events['events']
+# print(unsorted_events[:1])
 
 new_events = vertical_chain(unsorted_events)
 
