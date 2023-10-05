@@ -31,7 +31,19 @@
     data-autoplay="5">
 
     {% for event in events -%}
-    <div class="step" data-x="{{ event.xcor }}" data-y="{{ event.ycor }}" data-z="{{ event.zcor }}" data-scale="{{ event.scale }}" data-rotate-y="{{ event.rotate_y }}">
+    <div class="step" data-x="{{ event.xcor }}" data-y="{{ event.ycor }}" data-z="{{ event.zcor }}" data-scale="{{ event.scale }}" 
+        {% if event.rotate_x is not none %} 
+            data-rotate-x="{{ event.rotate_x }}"
+        {% endif %}
+
+        {% if event.rotate_y is not none %} 
+            data-rotate-y="{{ event.rotate_y }}"
+        {% endif %}
+        
+        {% if event.rotate_z is not none %}
+            data-rotate-z="{{ event.rotate_z }}"
+        {% endif %}
+        >
         <h2>{{ event.title }}</h2>
         <div class="event_info">
         <div class="image">

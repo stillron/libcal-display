@@ -1,4 +1,6 @@
 import datetime as dt
+import random
+
 class Event:
     MINUTES_HOURS_FMT = '%-I:%M %p'
     WEEKDAY_FMT = '%A'
@@ -11,39 +13,7 @@ class Event:
     scale = None
     xcor = ycor = zcor = None
 
-    @classmethod
-    def sort_events_by_date(cls):
-        cls.events.sort(key=lambda x: x.start)
-
-    @classmethod
-    def vertical_chain(cls):
-        Event.sort_events_by_date()
-        cls.xcor = cls.ycor = cls.zcor = cls.rotate_y = 0
-
-        for event in cls.events:
-            event.ycor = cls.ycor
-            event.rotate_y = cls.rotate_y
-            event.zcor = 0
-            event.scale = 1
-            event.xcor = 0
-            cls.ycor += 850
-            cls.rotate_y += 45
-    
-    @classmethod
-    def add_event(cls, event):
-        cls.events.append(event)
-    
-    @classmethod
-    def list_events(cls):
-        return cls.events
-
-    @classmethod
-    def length(cls):
-        return len(cls.events)
-
-    
-    def __init__(self, event: dict):
-        
+    def __init__(self, event: dict): 
         self.id = event.get("id")
         self.title = event.get("title")
         self.start = event.get("start")
@@ -65,6 +35,98 @@ class Event:
         self.xcor = None
         self.ycor = None
         self.zcor = None
+
+    @classmethod
+    def sort_events_by_date(cls):
+        cls.events.sort(key=lambda x: x.start)
+
+    @classmethod
+    def arrange(cls):
+        Event.sort_events_by_date()
+
+        arrangements = [
+            cls.vertical_chain, cls.horizontal_chain, cls.swoop_around, 
+            cls.ring_around, cls.ring_twist
+            ]
+        make_arrangement = random.choice(arrangements)
+        print(make_arrangement)
+        make_arrangement()
+
+    @classmethod
+    def vertical_chain(cls):
+        cls.xcor = cls.ycor = cls.zcor = cls.rotate_y = 0
+
+        for event in cls.events:
+            event.ycor = cls.ycor
+            event.rotate_y = cls.rotate_y
+            event.xcor = event.zcor = 0
+            event.scale = 1
+            cls.ycor += 850
+            cls.rotate_y += 45
+
+    @classmethod
+    def ring_around(cls):
+        cls.xcor = cls.ycor = cls.zcor = cls.rotate_z = 0
+
+        for event in cls.events:
+            event.ycor = cls.ycor
+            event.rotate_z = cls.rotate_z
+            event.xcor = event.zcor = 0
+            event.scale = 1
+            cls.ycor += 1500
+            cls.rotate_z += 45
+
+    @classmethod
+    def ring_twist(cls):
+        cls.xcor = cls.ycor = cls.zcor = cls.rotate_z = cls.rotate_y= 0
+
+        for event in cls.events:
+            event.ycor = cls.ycor
+            event.rotate_z = cls.rotate_z
+            event.rotate_y = cls.rotate_y
+            event.xcor = event.zcor = 0
+            event.scale = 1
+            cls.ycor += 1500
+            cls.rotate_z += 45
+            cls.rotate_y -= 60
+
+    @classmethod
+    def horizontal_chain(cls):
+        cls.xcor = cls.ycor = cls.zor = cls.rotate_x = 0
+
+        for event in cls.events:
+            event.xcor = cls.xcor
+            event.rotate_x = cls.rotate_x
+            event.ycor = event.zcor = 0
+            event.scale = 1
+            cls.xcor += 1800
+            cls.rotate_x += 90
+
+    @classmethod
+    def swoop_around(cls):
+        cls.xcor = cls.ycor = cls.zor = cls.rotate_y = cls.rotate_x = 0
+
+        for event in cls.events:
+            event.xcor = cls.xcor
+            event.rotate_y = cls.rotate_y
+            event.rotate_x = cls.rotate_x
+            event.ycor = event.zcor = 0
+            event.scale = 1
+            cls.xcor += 3000
+            cls.rotate_y += 90
+            cls.rotate_x += 90
+    
+    @classmethod
+    def add_event(cls, event):
+        cls.events.append(event)
+    
+    @classmethod
+    def list_events(cls):
+        return cls.events
+
+    @classmethod
+    def length(cls):
+        return len(cls.events)
 
     def _get_datetimes(self, time, fmt):
         """ Takes a string in isoformat and a strftime and returns the part of the string"""

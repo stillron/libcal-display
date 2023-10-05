@@ -34,14 +34,15 @@ unsorted_events = kilton_events['events'] + leb_events['events']
 
 for event in unsorted_events:
     an_event = Event(event)
-    print(an_event, len(an_event))
+    # print(an_event, len(an_event))
     Event.add_event(an_event)
-    print(Event.length())
+    # print(Event.length())
 
 
-Event.vertical_chain()
-
-
+# Event.vertical_chain()
+# Event.horizontal_chain()
+# Event.ring_twist()
+Event.arrange()
 
 output = template.render({"events": Event.list_events()})
 
