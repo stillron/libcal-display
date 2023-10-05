@@ -5,6 +5,42 @@ class Event:
     MONTH_FMT = '%B'
     YEAR_FMT = '%Y'
     DAY = "DAY"
+
+    events = []
+    rotate_x = rotate_y = rotate_z = None
+    scale = None
+    xcor = ycor = zcor = None
+
+    @classmethod
+    def sort_events_by_date(cls):
+        cls.events.sort(key=lambda x: x.start)
+
+    @classmethod
+    def vertical_chain(cls):
+        Event.sort_events_by_date()
+        cls.xcor = cls.ycor = cls.zcor = cls.rotate_y = 0
+
+        for event in cls.events:
+            event.ycor = cls.ycor
+            event.rotate_y = cls.rotate_y
+            event.zcor = 0
+            event.scale = 1
+            event.xcor = 0
+            cls.ycor += 850
+            cls.rotate_y += 45
+    
+    @classmethod
+    def add_event(cls, event):
+        cls.events.append(event)
+    
+    @classmethod
+    def list_events(cls):
+        return cls.events
+
+    @classmethod
+    def length(cls):
+        return len(cls.events)
+
     
     def __init__(self, event: dict):
         
@@ -57,22 +93,17 @@ class Event:
         return seconds // 60
 
 
-class EventsManager:
+
+
+# class EventsManager:
     
-    def __init__(self, events=[]):
-        self.events = events
-        self.sort_events_by_date()
-        
-    def sort_events_by_date(self):
-        self.events.sort(key=lambda x: x.start)
+#     def __init__(self, events=[]):
+#         self.events = events
+#         self.sort_events_by_date()
 
-    def add_event(self, event: Event):
-        self.events.append(event)
-        self.sort_events_by_date()
 
-    def __getitem__(self, position):
-        return self.events[position]
+#     def __getitem__(self, position):
+#         return self.events[position]
 
-    def __len__(self):
-        return len(self.events)
+
         
