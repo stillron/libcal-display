@@ -31,17 +31,20 @@ leb_events = requests.get('https://leblibrary.libcal.com/1.1/events?cal_id=17790
 
 
 unsorted_events = kilton_events['events'] + leb_events['events']
+print(unsorted_events[0]["start"])
 
-for event in unsorted_events:
-    an_event = Event(event)
-    # print(an_event, len(an_event))
-    Event.add_event(an_event)
-    # print(Event.length())
+Event.add_events(unsorted_events)
+# for event in unsorted_events:
+#     an_event = Event(event)
+#     # print(an_event, len(an_event))
+#     Event.add_event(an_event)
+#     # print(Event.length())
 
 
 # Event.vertical_chain()
 # Event.horizontal_chain()
 # Event.ring_twist()
+# Event.ring_around()
 Event.arrange()
 
 output = template.render({"events": Event.list_events()})

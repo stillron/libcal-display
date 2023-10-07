@@ -119,6 +119,13 @@ class Event:
     @classmethod
     def add_event(cls, event):
         cls.events.append(event)
+
+    @classmethod
+    def add_events(cls, events: list):
+        for event in events:
+            # print(event)
+            an_event = Event(event)
+            cls.add_event(an_event)
     
     @classmethod
     def list_events(cls):
