@@ -49,5 +49,5 @@ Event.arrange()
 
 output = template.render({"events": Event.list_events()})
 
-with open('output/test.html', 'w') as writer:
+with open('output/index.html', 'w') as writer:
     writer.write(output)
