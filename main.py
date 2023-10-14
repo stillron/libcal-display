@@ -45,8 +45,8 @@ Event.add_events(unsorted_events)
 # Event.horizontal_chain()
 # Event.ring_twist()
 # Event.ring_around()
-# Event.clusters()
-Event.arrange()
+Event.clusters()
+# Event.arrange()
 
 output = template.render({"events": Event.list_events()})
 

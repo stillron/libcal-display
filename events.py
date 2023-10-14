@@ -121,31 +121,34 @@ class Event:
         cls.xcor = cls.ycor = cls.zcor = cls.rotate_y = cls.rotate_x = cls.rotate_z = 0
         cls.scale =1
 
-        ranges = tuple(range(-15000, 15000, 3000))
-
+        ranges = tuple(range(-6000, 6000, 1200))
+        first = tuple(range(0, 500, 3))
+        second = tuple(range(1, 500, 3))
+        third = tuple(range(2, 500, 3))
+        
         for index, event in enumerate(cls.events):
-            if index in list(range(0,100,3)):
-                event.scale = cls.scale
+            event.scale = cls.scale
+            cls.xcor = random.choice(ranges)
+            cls.ycor = random.choice(ranges)
+            cls.zcor = random.choice(ranges)
+
+
+            if index in first:
                 event.xcor = cls.xcor
                 event.ycor = cls.ycor
                 event.zcor = cls.zcor
                 event.rotate_x = cls.rotate_x
                 event.rotate_y = cls.rotate_y
                 cls.rotate_x += 90
-            elif index in list(range(1, 100, 3)):
+            elif index in second:
                 event.rotate_x = cls.rotate_x
-                event.scale = cls.scale
                 cls.rotate_y += 90
-            elif index in list(range(2, 100, 3)):
+            elif index in third:
                 event.rotate_y = cls.rotate_y
                 event.rotate_x = cls.rotate_x
-                event.scale = cls.scale
                 cls.rotate_y = 0
                 cls.rotate_x = 0
-                cls.xcor = random.choice(ranges)
-                cls.ycor = random.choice(ranges)
-                cls.zcor = random.choice(ranges)
-                # cls.scale = random.choice(tuple(range(1,4)))
+
 
 
     @classmethod
