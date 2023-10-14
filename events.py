@@ -46,7 +46,7 @@ class Event:
 
         arrangements = [
             cls.vertical_chain, cls.horizontal_chain, cls.swoop_around, 
-            cls.ring_around, cls.ring_twist
+            cls.ring_around, cls.ring_twist, cls.clusters
             ]
         make_arrangement = random.choice(arrangements)
         print(make_arrangement)
@@ -115,7 +115,39 @@ class Event:
             cls.xcor += 3000
             cls.rotate_y += 90
             cls.rotate_x += 90
-    
+
+    @classmethod
+    def clusters(cls):
+        cls.xcor = cls.ycor = cls.zcor = cls.rotate_y = cls.rotate_x = cls.rotate_z = 0
+        cls.scale =1
+
+        ranges = tuple(range(-15000, 15000, 3000))
+
+        for index, event in enumerate(cls.events):
+            if index in list(range(0,100,3)):
+                event.scale = cls.scale
+                event.xcor = cls.xcor
+                event.ycor = cls.ycor
+                event.zcor = cls.zcor
+                event.rotate_x = cls.rotate_x
+                event.rotate_y = cls.rotate_y
+                cls.rotate_x += 90
+            elif index in list(range(1, 100, 3)):
+                event.rotate_x = cls.rotate_x
+                event.scale = cls.scale
+                cls.rotate_y += 90
+            elif index in list(range(2, 100, 3)):
+                event.rotate_y = cls.rotate_y
+                event.rotate_x = cls.rotate_x
+                event.scale = cls.scale
+                cls.rotate_y = 0
+                cls.rotate_x = 0
+                cls.xcor = random.choice(ranges)
+                cls.ycor = random.choice(ranges)
+                cls.zcor = random.choice(ranges)
+                # cls.scale = random.choice(tuple(range(1,4)))
+
+
     @classmethod
     def add_event(cls, event):
         cls.events.append(event)
