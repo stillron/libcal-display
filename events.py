@@ -13,8 +13,11 @@ class Event:
     scale = None
     xcor = ycor = zcor = None
 
-    def __init__(self, event: dict): 
+    def __init__(self, event: dict):
+        # Event Metadata
         self.id = event.get("id")
+
+        # Event Data
         self.title = event.get("title")
         self.start = event.get("start")
         self.end = event.get("end")
@@ -28,6 +31,8 @@ class Event:
         self.location = event.get('location').get('name')
         self.description = event.get('description')
         self.image = event.get('featured_image')
+
+        # Impress.js Positional Data
         self.rotate_x = None
         self.rotate_y = None
         self.rotate_z = None

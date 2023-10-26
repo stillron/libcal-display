@@ -11,6 +11,8 @@ config = dotenv_values('.env')
 # Setup Jinja2 Environment
 env = Environment(
     loader=FileSystemLoader('templates'),
+    trim_blocks=True,
+    lstrip_blocks=True,
     autoescape=select_autoescape()
 )
 
@@ -45,8 +47,8 @@ Event.add_events(unsorted_events)
 # Event.horizontal_chain()
 # Event.ring_twist()
 # Event.ring_around()
-Event.clusters()
-# Event.arrange()
+# Event.clusters()
+Event.arrange()
 
 output = template.render({"events": Event.list_events()})
 
