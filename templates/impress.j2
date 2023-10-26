@@ -30,16 +30,16 @@
     {% for event in events -%}
     <div class="step" 
         {%- if event.xcor is not none %} data-x="{{ event.xcor }}" {% endif %}
-        {%- if event.ycor is not none %} data-y="{{ event.ycor }}" {% endif %}
-        {%- if event.zcor is not none %} data-z="{{ event.zcor }}" {% endif %}
-        {%- if event.scale is not none %} data-scale="{{ event.scale }}" {% endif %}
-        {%- if event.rotate_x is not none %} data-rotate-x="{{ event.rotate_x }}" {% endif %}
-        {%- if event.rotate_y is not none %} data-rotate-y="{{ event.rotate_y }}" {% endif %}
-        {%- if event.rotate_z is not none %} data-rotate-z="{{ event.rotate_z }}" {% endif %}>
+        {%- if event.ycor is not none -%} data-y="{{ event.ycor }}" {% endif %}
+        {%- if event.zcor is not none -%} data-z="{{ event.zcor }}" {% endif %}
+        {%- if event.scale is not none -%} data-scale="{{ event.scale }}" {% endif %}
+        {%- if event.rotate_x is not none -%} data-rotate-x="{{ event.rotate_x }}" {% endif %}
+        {%- if event.rotate_y is not none -%} data-rotate-y="{{ event.rotate_y }}" {% endif %}
+        {%- if event.rotate_z is not none -%} data-rotate-z="{{ event.rotate_z }}" {% endif %}>
         <h2>{{ event.title }}</h2>
             <div class="event_info">
                 <div class="image">
-                    <img  src="{{ event.image }}" />
+                    <img src="{{ event.image }}"/>
                 </div>
             <div class="info">
                 <p class="event_date">{{ event.weekday }}, {{event.month}} {{ event.day }}</p>

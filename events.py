@@ -203,16 +203,4 @@ class Event:
 
 
 
-
-# class EventsManager:
-    
-#     def __init__(self, events=[]):
-#         self.events = events
-#         self.sort_events_by_date()
-
-
-#     def __getitem__(self, position):
-#         return self.events[position]
-
-
         
