@@ -200,7 +200,3 @@ class Event:
         end = dt.datetime.fromisoformat(self.end)
         seconds = int(( end - start).total_seconds())
         return seconds // 60
-
-
-
-        
