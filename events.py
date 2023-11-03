@@ -4,7 +4,7 @@ import random
 class Event:
     MINUTES_HOURS_FMT = '%-I:%M %p'
     WEEKDAY_FMT = '%A'
-    MONTH_FMT = '%B'
+    MONTH_FMT = '%b'
     YEAR_FMT = '%Y'
     DAY = "DAY"
 
